@@ -3,11 +3,9 @@ import { defineStore } from "pinia";
 export const mainStore = defineStore("main", {
   state: () => {
     return {
-      imgLoadStatus: false, // 壁纸加载状态
       innerWidth: null, // 当前窗口宽度
       coverType: "0", // 壁纸种类
-      siteStartShow: false, // 建站日期显示
-      musicClick: false, // 音乐链接是否跳转
+      siteStartShow: true, // 建站日期显示
       musicIsOk: false, // 音乐是否加载完成
       musicVolume: 0, // 音乐音量;
       musicOpenState: false, // 音乐面板开启状态
@@ -20,8 +18,7 @@ export const mainStore = defineStore("main", {
       playerTitle: null, // 当前播放歌曲名
       playerArtist: null, // 当前播放歌手名
       playerLrc: "歌词加载中", // 当前播放歌词
-      playerLrcShow: true, // 是否显示底栏歌词
-      footerBlur: true, // 底栏模糊
+      musicClick: false, // 音乐链接是否跳转
     };
   },
   getters: {
@@ -67,21 +64,10 @@ export const mainStore = defineStore("main", {
       this.playerTitle = title;
       this.playerArtist = artist;
     },
-    // 更改壁纸加载状态
-    setImgLoadStatus(value) {
-      this.imgLoadStatus = value;
-    },
   },
   persist: {
     key: "data",
     storage: window.localStorage,
-    paths: [
-      "coverType",
-      "musicVolume",
-      "siteStartShow",
-      "musicClick",
-      "playerLrcShow",
-      "footerBlur",
-    ],
+    paths: ["coverType", "musicVolume", "siteStartShow", "musicClick"],
   },
 });

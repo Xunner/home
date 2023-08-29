@@ -18,7 +18,11 @@
               <span class="sm-hidden">{{ currentTime.weekday }}</span>
             </div>
             <div class="text">
-              <span> {{ currentTime.hour }}:{{ currentTime.minute }}:{{ currentTime.second }}</span>
+              <span>
+                {{ currentTime.hour }}:{{ currentTime.minute }}:{{
+                  currentTime.second
+                }}</span
+              >
             </div>
           </div>
           <Weather />
@@ -29,11 +33,12 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { getCurrentTime } from "@/utils/getTime";
 import { mainStore } from "@/store";
-import Music from "@/components/Music.vue";
-import Hitokoto from "@/components/Hitokoto.vue";
-import Weather from "@/components/Weather.vue";
+import Music from "@/components/Music/index.vue";
+import Hitokoto from "@/components/Hitokoto/index.vue";
+import Weather from "@/components/Weather/index.vue";
 
 const store = mainStore();
 
@@ -41,14 +46,10 @@ const store = mainStore();
 const currentTime = ref({});
 const timeInterval = ref(null);
 
-// 更新时间
-const updateTimeData = () => {
-  currentTime.value = getCurrentTime();
-};
-
 onMounted(() => {
-  updateTimeData();
-  timeInterval.value = setInterval(updateTimeData, 1000);
+  timeInterval.value = setInterval(() => {
+    currentTime.value = getCurrentTime();
+  }, 1000);
 });
 
 onBeforeUnmount(() => {
@@ -109,7 +110,8 @@ onBeforeUnmount(() => {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      animation: fade 0.5s;
+      animation: fade;
+      -webkit-animation: fade 0.5s;
       .time {
         font-size: 1.1rem;
         text-align: center;

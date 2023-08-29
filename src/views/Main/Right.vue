@@ -4,6 +4,7 @@
     <div class="logo text-hidden" @click="store.mobileFuncState = !store.mobileFuncState">
       <span class="bg">{{ siteUrl[0] }}</span>
       <span class="sm">.{{ siteUrl[1] }}</span>
+      <span class="sm">.{{ siteUrl[2] }}</span>
     </div>
     <!-- 功能区 -->
     <Func />
@@ -15,12 +16,13 @@
 <script setup>
 import { mainStore } from "@/store";
 import Func from "@/views/Func/index.vue";
-import Link from "@/components/Links.vue";
+import Link from "@/components/Links/index.vue";
 const store = mainStore();
 
 // 站点链接
 const siteUrl = import.meta.env.VITE_SITE_URL.split(".");
 </script>
+
 
 <style lang="scss" scoped>
 .right {
@@ -35,8 +37,9 @@ const siteUrl = import.meta.env.VITE_SITE_URL.split(".");
     top: 6%;
     left: 0;
     text-align: center;
-    transition: transform 0.3s;
-    animation: fade 0.5s;
+    transition: all 0.3s;
+    animation: fade;
+    -webkit-animation: fade 0.5s;
     &:active {
       transform: scale(0.95);
     }
